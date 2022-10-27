@@ -10,6 +10,13 @@ class ipv4calc : public Gtk::Window
 
       public:
         ipv4calc ();
+
+      private:
+        Gtk::Box v_gtkmm_box;
+        Gtk::Box h_gtkmm_box;
+        Gtk::Entry gtkmm_entry;
+
+        void make_entry(Gtk::Entry* gtk_entry);
 };
 
 #endif
