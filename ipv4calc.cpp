@@ -4,6 +4,8 @@
 #include <gtkmm/box.h>
 #include <gtkmm/entry.h>
 #include <gtkmm/enums.h>
+#include <gtkmm/label.h>
+#include <gtkmm/liststore.h>
 #include <gtkmm/widget.h>
 #include <gtkmm/window.h>
 #include <sigc++/functors/mem_fun.h>
@@ -24,6 +26,19 @@ ipv4calc::ipv4calc ()
         v_gtkmm_box.append (this->entry_and_submit);
         this->gtkmm_button.signal_clicked ().connect (
             sigc::mem_fun (*this, &ipv4calc::on_submit));
+
+
+// tabel
+        this->scrolled_window.set_child(treeview);
+        v_gtkmm_box.append(this->scrolled_window);
+        this->scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
+        this->scrolled_window.set_expand();
+
+        // this->v_gtkmm_box.append(this->scrolled_window);
+        this->ref_tree = Gtk::ListStore::create(columns);
+        this->treeview.set_model(this->ref_tree);
+
+        this->treeview.append_column("SUBNET", columns.subnet);
 }
 
 void
