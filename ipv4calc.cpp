@@ -36,7 +36,12 @@ ipv4calc::ipv4calc ()
 
         // this->v_gtkmm_box.append(this->scrolled_window);
         this->ref_tree = Gtk::ListStore::create(columns);
-        this->treeview.set_model(this->ref_tree);
+        this->treeview.set_model(ref_tree);
+
+        auto row = *(ref_tree->append());
+        
+        row[columns.subnet] = "244";
+        
 
         this->treeview.append_column("SUBNET", columns.subnet);
 }
