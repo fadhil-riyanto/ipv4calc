@@ -27,23 +27,25 @@ ipv4calc::ipv4calc ()
         this->gtkmm_button.signal_clicked ().connect (
             sigc::mem_fun (*this, &ipv4calc::on_submit));
 
-
-// tabel
-        this->scrolled_window.set_child(treeview);
-        v_gtkmm_box.append(this->scrolled_window);
-        this->scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
-        this->scrolled_window.set_expand();
+        // tabel
+        this->scrolled_window.set_child (treeview);
+        v_gtkmm_box.append (this->scrolled_window);
+        this->scrolled_window.set_policy (Gtk::PolicyType::AUTOMATIC,
+                                          Gtk::PolicyType::AUTOMATIC);
+        this->scrolled_window.set_expand ();
 
         // this->v_gtkmm_box.append(this->scrolled_window);
-        this->ref_tree = Gtk::ListStore::create(columns);
-        this->treeview.set_model(ref_tree);
+        this->ref_tree = Gtk::ListStore::create (columns);
+        this->treeview.set_model (ref_tree);
 
-        auto row = *(ref_tree->append());
-        
-        row[columns.subnet] = "244";
-        
+        auto row = *(ref_tree->append ());
+        for (int h = 0; h < 100; h++)
+                {
+                        row = *(ref_tree->append());
+                        row[columns.subnet] = "satu";
+                }
 
-        this->treeview.append_column("SUBNET", columns.subnet);
+        this->treeview.append_column ("SUBNET", columns.subnet);
 }
 
 void
