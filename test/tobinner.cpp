@@ -9,7 +9,7 @@ class binary_util
 {
 
       public:
-        int binary_data[8];
+        u_int8_t binary_data[8];
         void
         to_bin (u_int8_t data)
         {
@@ -36,19 +36,30 @@ class binary_util
                         }
         }
 
-        // int
-        // to_dec (u_int8_t data)
-        // {
-        // }
+        int
+        to_dec (u_int8_t data[])
+        {
+                int literate[] = {128, 64, 32, 16, 8, 4, 2, 1};
+                int sum = 0;
+                for(int i = 0; i < 8; i++)
+                {
+                        if (data[i] == 1)
+                        {
+                                sum = (sum + (data[i] * literate[i]));
+                        }
+                }
+                return sum;
+        }
 };
 
 int
 main (int argc, char *argv[])
 {
         binary_util binary_util;
-        binary_util.to_bin (177);
+        binary_util.to_bin (239);
         for (int i = 0; i < 8; i++)
                 {
                         fprintf (stdout, "%d", binary_util.binary_data[i]);
                 }
+        printf("\n%d\n", binary_util.to_dec(binary_util.binary_data));
 }
