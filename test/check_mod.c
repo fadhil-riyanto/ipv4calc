@@ -3,19 +3,21 @@
 int
 main (int argv, char *argc[])
 {
-        int data = 212;
+        int data = 8;
         int changed_dataf = data;
         int binnums;
-        for (int i = 0; i < 8; i++)
+
+        for (; changed_dataf > 0;)
                 {
-                        fprintf (stdout, "%d\n", binnums);
+
                         // binnums = changed_dataf % (float)2;
-                        changed_dataf = changed_dataf / 2;
                         binnums = changed_dataf % 2;
+                        changed_dataf = changed_dataf / 2;
                         
-                        
+                        fprintf (stdout, "%d", binnums);
                 }
-
-
+       
+        // changed_dataf = changed_dataf / 2;
+        // binnums = changed_dataf % 2;
         
 }
