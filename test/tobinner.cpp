@@ -5,28 +5,50 @@
 #include <string>
 #include <sys/types.h>
 
-class tobinner
+class binary_util
 {
+
       public:
-        std::string *
+        int binary_data[8];
+        void
         to_bin (u_int8_t data)
         {
-                std::string *listofbinner;
-                listofbinner = (std::string*)malloc (sizeof (std::string) *
-                8);
+                int changed_dataf = data;
+                int binnums[8];
+                int i = 0;
+                for (; changed_dataf > 0;)
+                        {
+                                binnums[i++] = changed_dataf % 2;
+                                changed_dataf = changed_dataf / 2;
+                        }
 
-                return listofbinner;
+                // fill last byte with zero
+                for (; i < 8;)
+                        {
+                                binnums[i++] = 0;
+                        }
+                int literateend = 0;
+                for (int a = 8; a > 0; a--)
+                        {
+                                this->binary_data[literateend++]
+                                    = binnums[a - 1];
+                                // fprintf (stdout, "%d", binnums[a - 1]);
+                        }
         }
-        void
-        freeup (std::string *memory_addr)
-        {
-                free (memory_addr);
-        }
+
+        // int
+        // to_dec (u_int8_t data)
+        // {
+        // }
 };
 
 int
 main (int argc, char *argv[])
 {
-        tobinner tobinner;
-        tobinner.freeup (tobinner.to_bin (3));
+        binary_util binary_util;
+        binary_util.to_bin (177);
+        for (int i = 0; i < 8; i++)
+                {
+                        fprintf (stdout, "%d", binary_util.binary_data[i]);
+                }
 }
