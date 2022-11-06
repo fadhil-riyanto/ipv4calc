@@ -28,30 +28,31 @@ ipv4calc::ipv4calc ()
             sigc::mem_fun (*this, &ipv4calc::on_submit));
 
         // tabel
-        this->scrolled_window.set_child (treeview);
-        v_gtkmm_box.append (this->scrolled_window);
-        this->scrolled_window.set_policy (Gtk::PolicyType::AUTOMATIC,
-                                          Gtk::PolicyType::AUTOMATIC);
-        this->scrolled_window.set_expand ();
-
-        // this->v_gtkmm_box.append(this->scrolled_window);
-        this->ref_tree = Gtk::ListStore::create (columns);
-        this->treeview.set_model (ref_tree);
-
-        auto row = *(ref_tree->append ());
-        for (int h = 0; h < 100; h++)
-                {
-                        row = *(ref_tree->append());
-                        row[columns.subnet] = "satu";
-                }
-
-        this->treeview.append_column ("SUBNET", columns.subnet);
 }
 
 void
 ipv4calc::on_submit ()
 {
-        printf ("%s\n", this->gtkmm_entry.get_text ().c_str ());
+        printf ("%s\n", this->ip_byte4.get_text ().c_str ());
+        this->scrolled_window.set_child (treeview);
+        this->v_gtkmm_box.append (this->scrolled_window);
+        this->scrolled_window.set_policy (Gtk::PolicyType::AUTOMATIC,
+                                          Gtk::PolicyType::AUTOMATIC);
+        this->scrolled_window.set_expand ();
+
+        // this->v_gtkmm_box.append(this->scrolled_window);
+        //Gtk::ListStore::clear( this->ref_tree );
+        this->ref_tree = Gtk::ListStore::create (columns);
+        this->treeview.set_model (ref_tree);
+
+        auto row = *(this->ref_tree->append ());
+        for (int h = 0; h < 100; h++)
+                {
+                        row = *(ref_tree->append ());
+                        row[columns.subnet] = "satu";
+                }
+
+        this->treeview.append_column ("SUBNET", columns.subnet);
 }
 
 void
@@ -62,18 +63,23 @@ ipv4calc::make_ip_entry ()
 
         this->ip_byte1.set_margin (10);
         this->ip_byte1.set_max_length (max_byte_length);
+        this->ip_byte1.set_placeholder_text ("byte 1");
 
         this->ip_byte2.set_margin (10);
         this->ip_byte2.set_max_length (max_byte_length);
+        this->ip_byte2.set_placeholder_text ("byte 2");
 
         this->ip_byte3.set_margin (10);
         this->ip_byte3.set_max_length (max_byte_length);
+        this->ip_byte3.set_placeholder_text ("byte 3");
 
         this->ip_byte4.set_margin (10);
         this->ip_byte4.set_max_length (max_byte_length);
+        this->ip_byte4.set_placeholder_text ("byte 4");
 
         this->ip_cidr.set_margin (10);
         this->ip_cidr.set_max_length (max_cidr_length);
+        this->ip_cidr.set_placeholder_text ("CIDR value");
 
         this->entry_ip.append (this->ip_byte1);
         this->entry_ip.append (this->ip_byte2);
@@ -92,5 +98,6 @@ ipv4calc::make_button ()
 void
 ipv4calc::on_button_clicked ()
 {
+        
         printf ("%s\n", "clicked");
 }
