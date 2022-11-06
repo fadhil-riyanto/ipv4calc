@@ -56,7 +56,7 @@ int
 main (int argc, char *argv[])
 {
         binary_util binary_util;
-        binary_util.to_bin (239);
+        binary_util.to_bin (27);
         for (int i = 0; i < 8; i++)
                 {
                         fprintf (stdout, "%d", binary_util.binary_data[i]);
